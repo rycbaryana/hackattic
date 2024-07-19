@@ -49,10 +49,9 @@ T Get(std::vector<byte> bytes, bool big_endian = false) {  // bytes in little_en
 }
 
 int main() {
-    std::string encoded;
-    std::cin >> encoded;
+    json statement = tools::GetStatement("help_me_unpack");
+    std::string encoded = statement["bytes"];
     auto bytes = decode(encoded);
-    std::cout << bytes.size() << '\n';
     json solution;
     solution["int"] = Get<int>({bytes.begin(), bytes.begin() + 4});
     solution["uint"] = Get<uint>({bytes.begin() + 4, bytes.begin() + 8});
@@ -60,6 +59,6 @@ int main() {
     solution["float"] = Get<float>({bytes.begin() + 12, bytes.begin() + 16});
     solution["double"] = Get<double>({bytes.begin() + 16, bytes.begin() + 24});
     solution["big_endian_double"] = Get<double>({bytes.begin() + 24, bytes.begin() + 32}, true);
-    std::cout << solution.dump(4) << '\n';
+    tools::PostSolution("help_me_unpack", solution);
     return 0;
 }
