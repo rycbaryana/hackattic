@@ -12,9 +12,12 @@ json GetStatement(const std::string& problem) {
     std::cout << resp.dump(4) << '\n';
     return resp;
 }
-json PostSolution(const std::string& problem, const json& j) {
+json PostSolution(const std::string& problem, const json& j, bool playground) {
     std::string url =
         "https://hackattic.com/challenges/" + problem + "/solve?access_token=" + access_token;
+    if (playground) {
+        url += "&playground=1";
+    }
     std::cout << "Posting solution for " << problem << " problem...\n";
     auto resp = json::parse(cpr::Post(cpr::Url{url}, cpr::Body{j.dump()}).text);
     std::cout << "Response: \n" << resp.dump(4) << '\n';

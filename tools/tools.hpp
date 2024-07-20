@@ -6,6 +6,6 @@
 namespace tools {
 using namespace nlohmann;
 json GetStatement(const std::string& problem);
-json PostSolution(const std::string& problem, const json& j);
+json PostSolution(const std::string& problem, const json& j, bool playground = false);
 void DowloadFile(const std::string& url, const std::string filename);
 }  // namespace tools

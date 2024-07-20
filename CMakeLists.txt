@@ -9,6 +9,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -march=nat
 add_subdirectory(help_me_unpack)
 add_subdirectory(mini_miner)
 add_subdirectory(tools)
+add_subdirectory(tales_of_ssl)
 include_directories(tools)
 
 
