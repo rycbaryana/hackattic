@@ -3,41 +3,8 @@
 #include <tools.hpp>
 #include <iostream>
 
-std::string Encode(const std::string &data) {
-    static constexpr char sEncodingTable[] = {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
-        'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-        'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'};
-
-    size_t in_len = data.size();
-    size_t out_len = 4 * ((in_len + 2) / 3);
-    std::string ret(out_len, '\0');
-    size_t i;
-    char *p = const_cast<char *>(ret.c_str());
-
-    for (i = 0; in_len > 2 && i < in_len - 2; i += 3) {
-        *p++ = sEncodingTable[(data[i] >> 2) & 0x3F];
-        *p++ = sEncodingTable[((data[i] & 0x3) << 4) | ((int)(data[i + 1] & 0xF0) >> 4)];
-        *p++ = sEncodingTable[((data[i + 1] & 0xF) << 2) | ((int)(data[i + 2] & 0xC0) >> 6)];
-        *p++ = sEncodingTable[data[i + 2] & 0x3F];
-    }
-    if (i < in_len) {
-        *p++ = sEncodingTable[(data[i] >> 2) & 0x3F];
-        if (i == (in_len - 1)) {
-            *p++ = sEncodingTable[((data[i] & 0x3) << 4)];
-            *p++ = '=';
-        } else {
-            *p++ = sEncodingTable[((data[i] & 0x3) << 4) | ((int)(data[i + 1] & 0xF0) >> 4)];
-            *p++ = sEncodingTable[((data[i + 1] & 0xF) << 2)];
-        }
-        *p++ = '=';
-    }
-
-    return ret;
-}
 int main() {
-    auto statement = tools::GetStatement("tales_of_ssl");
+    auto statement = net::GetStatement("tales_of_ssl");
     auto data = statement["required_data"];
     std::string key = statement["private_key"];
     key = "-----BEGIN RSA PRIVATE KEY-----\n" + key;
@@ -83,10 +50,10 @@ int main() {
     std::string private_key = std::string((char *)buf, len);
     std::ofstream of("cert.crt");
     of << private_key;
-    private_key = Encode(private_key);
+    private_key = base64::Encode(private_key);
     nlohmann::json solution;
     solution["certificate"] = private_key;
-    tools::PostSolution("tales_of_ssl", solution);
+    net::PostSolution("tales_of_ssl", solution);
     EVP_PKEY_free(pkey);
     BIO_free(bio_read);
     X509_free(certificate);

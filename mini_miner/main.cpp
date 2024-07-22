@@ -52,7 +52,7 @@ int find_nonce(json data, int difficulty) {
 const std::string problem = "mini_miner";
 
 int main() {
-    json j = tools::GetStatement(problem);
+    json j = net::GetStatement(problem);
 
     int difficulty = j["difficulty"];
     json block = j["block"];
@@ -64,6 +64,6 @@ int main() {
     solution["nonce"] = nonce;
     std::cout << "Submitting...\n";
 
-    std::cout << tools::PostSolution(problem, solution) << '\n';
+    std::cout << net::PostSolution(problem, solution) << '\n';
     return 0;
 }
