@@ -1,7 +1,8 @@
 #include "tools.hpp"
 #include <iostream>
 namespace net {
-const std::string access_token = "***REMOVED***";
+
+const std::string access_token = TOKEN;
 
 using namespace nlohmann;
 json GetStatement(const std::string& problem) {

@@ -9,3 +9,15 @@ add_library(tools tools.cpp)
 
 target_link_libraries(tools PUBLIC cpr::cpr nlohmann_json::nlohmann_json)
 
+
+
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/token.txt)
+    file (STRINGS "token.txt" token_file)
+    list(GET token_file 0 token)
+    message("Token found ${token}")
+else()
+    message(FATAL_ERROR "No token file found")
+endif()
+
+add_definitions(-DTOKEN="${token}")
+
