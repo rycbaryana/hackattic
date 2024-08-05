@@ -2,3 +2,4 @@ build
 .cache
 __pycache__
 tools/token.txt
+reading_qr/image.png

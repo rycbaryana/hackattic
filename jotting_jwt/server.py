@@ -3,19 +3,20 @@ from sanic import Sanic, empty, json
 import requests
 import jwt
 import json as j
+from tools import tools
 
 app = Sanic("JottingJWT")
 
 
 # using ngrok to share my app with internet
 url = "<MY NGROK DOMAIN>"
+problem = "jotting_jwts"
 
 @app.before_server_start
 async def main(app, loop):
     print("Jotting JWT # rycbaryana")
     print("Gathering secret...")
-    app.ctx.secret = j.loads(requests.get(
-        'https://hackattic.com/challenges/jotting_jwts/problem?access_token=***REMOVED***').text)["jwt_secret"]
+    app.ctx.secret = tools.get_statement(problem)["jwt_secret"]
     app.ctx.res = ""
     print(f"Secret \"{app.ctx.secret}\" gathered!")
 
