@@ -2,4 +2,7 @@ build
 .cache
 __pycache__
 tools/token.txt
-reading_qr/image.png
+reading_qr/*.png
+brute_force_zip/*.zip
+brute_force_zip/secret.txt
+!brute_force_zip/attack.zip

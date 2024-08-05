@@ -24,6 +24,7 @@ def post_solution(problem: str, solution, playground=False):
         url += "&playground=1"
     print(f"Posting solution for {problem} problem...")
     resp = requests.post(url, json=solution).json()
+    print(resp)
     return resp
 def download_file(url, filename):
     print(f"Downloading from {url} to {filename}...")
