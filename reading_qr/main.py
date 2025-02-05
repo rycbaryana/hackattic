@@ -15,4 +15,4 @@ if __name__ == "__main__":
     decoded_text = qreader.detect_and_decode(image=image)
 
     print("Done! Code is", decoded_text[0])
-    print(tools.post_solution(problem, {"code":decoded_text[0]}, True))
+    print(tools.post_solution(problem, {"code": decoded_text[0]}, True))
