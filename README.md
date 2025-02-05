@@ -10,7 +10,7 @@ My solutions for problems from [hackattic](https://hackattic.com/challenges).
 - [ ] The One with Redis
 - [ ] Visual Basic Math
 - [ ] A Global Presence
-- [ ] WebSocket Chit Chat
+- [x] WebSocket Chit Chat
 - [ ] Collision Course
 - [ ] Hosting Git
 - [x] Jotting JWTs
