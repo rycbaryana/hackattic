@@ -1,0 +1,13 @@
+[project]
+name = "ws-chit-chat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "tools",
+    "websocket-client>=1.8.0",
+]
+
+[tool.uv.sources]
+tools = { path = "../tools", editable = true }

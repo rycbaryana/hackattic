@@ -6,3 +6,6 @@ reading_qr/*.png
 brute_force_zip/*.zip
 brute_force_zip/secret.txt
 !brute_force_zip/attack.zip
+.env
+tools/tools.egg-info
+.python-version

@@ -1,12 +1,13 @@
 import requests
 import urllib
-import tools
 import os
+import sys
 
-dir = os.path.dirname(__file__)
-with open(os.path.join(dir, "token.txt")) as f:
-    token = f.readline()
-    print(f"Token found {token}")
+if 'ACCESS_TOKEN' in os.environ:
+    token = os.environ['ACCESS_TOKEN']
+else:
+    print(os.environ)
+    sys.exit("No token found in env")
 
 
 def get_statement(problem: str):
